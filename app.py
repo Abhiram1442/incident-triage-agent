@@ -1,5 +1,5 @@
 from flask import Flask, render_template, jsonify, request
-from mock_alerts import ALERTS, METRICS
+from mock_alerts import get_alerts, METRICS
 from database import init_db, save_incident, mark_resolved
 from datetime import datetime
 import json
@@ -16,8 +16,7 @@ def parse_time(ts):
     return datetime.fromisoformat(ts)
 
 def analyze_alerts():
-    """Triage alerts and group by root cause."""
-    alerts = ALERTS
+    alerts = get_alerts()
     groups = []
     used = set()
     
