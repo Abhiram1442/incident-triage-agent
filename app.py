@@ -77,7 +77,12 @@ def analyze_alerts():
     return incidents
 
 @app.route('/')
-def home():
+def landing():
+    with open('landing.html', 'r') as f:
+        return f.read()
+
+@app.route('/dashboard')
+def index():
     incidents = analyze_alerts()
     stats = {
         "total": len(incidents),
